@@ -7,20 +7,24 @@ console.log(form, input, ul)
 var apiKey = 'fe57efed754a6bd09a995c8f11d88d46'
 
 function renderCity(city) {
-    fetch('http://api.openweathermap.org/geo/1.0/direct?q=' + city + '&limit=5&appid=' + apiKey)
+    fetch('http://api.openweathermap.org/geo/1.0/direct?q=' + city + '&limit=1&appid=' + apiKey)
     .then(function(response) {
         return response.json()
     })
-    .then(function(name){
-        console.log(name)
+    .then(function(city){
+        for (var i = 0; i < city.length; i++){
+        console.log(city[i].name)
+        console.log(city[i].lon)
+        console.log(city[i].lat)
+    }
     })
 }
 
 
 
-function renderWeather(city) {
+/*function renderWeather(city) {
     fetch('http://api.openweathermap.org/geo/1.0/direct?q=' + city + ',{state code},{country code}&limit={limit}&appid=' + apiKey)
-}
+}*/
 
 
 
@@ -29,7 +33,7 @@ function handleSubmit(event) {
 
     var city = input.value
     renderCity(city)
-    renderWeather(city)
+    //renderWeather(city)
 }
 
 form.addEventListener('submit', handleSubmit)
