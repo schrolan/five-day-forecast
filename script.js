@@ -5,6 +5,8 @@ var ul = document.querySelector('.list-group')
 var cardGroup = document.createElement('div')
 var cardHTML = document.getElementById('cards')
 var cardgroupHTML = document.getElementById('card-groupHTML')
+var previousSearch = document.createElement('button')
+var city = [];
 cardGroup.classList.add('card-group')
 
 console.log(form, input, ul)
@@ -30,7 +32,6 @@ function renderCity(city) {
         })
         .then(function(city){
             var temp = city.list[0].main.temp
-            
             
             var todayTemp = city.list[0].main.temp
             var todayHumidity = city.list[0].main.humidity
@@ -62,6 +63,7 @@ function renderCity(city) {
             var forecastImg = document.createElement('img')
             forecastImg.src = 'http://openweathermap.org/img/wn/' + icon1 + '@2x.png'
             cardBody0.appendChild(forecastImg)
+            localStorage.setItem("Previous Search", JSON.stringify(cityName))
             
             for (var i = 1; i < 6; i++) {
                 cardgroupHTML = document.getElementById('card-groupHTML')
@@ -117,15 +119,13 @@ function renderCity(city) {
 
 
 
-
 function handleSubmit(event) {
     event.preventDefault()
     var city = input.value
     renderCity(city)
-    input.value = ""
     cardHTML.innerHTML = ""
     cardGroup.innerHTML = ""
-    //renderWeather(city)
+    input.value = ""
 }
 
 form.addEventListener('submit', handleSubmit)
